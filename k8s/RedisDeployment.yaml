@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: redis
-          image: redis:7.0.5  # 최신 안정 버전 권장
+          image: redis:latest  # 최신 안정 버전 권장
           ports:
             - containerPort: 6379
           volumeMounts:

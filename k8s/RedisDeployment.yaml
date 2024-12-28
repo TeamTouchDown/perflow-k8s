@@ -1,0 +1,31 @@
+# deployments/redis-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  namespace: perflow
+  labels:
+    app: redis
+spec:
+  replicas: 1  # 필요에 따라 조정
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+        - name: redis
+          image: redis:7.0.5  # 최신 안정 버전 권장
+          ports:
+            - containerPort: 6379
+          volumeMounts:
+            - name: redis-storage
+              mountPath: /data
+          args: ["redis-server", "--appendonly", "yes"]  # 비밀번호 관련 설정 제거
+      volumes:
+        - name: redis-storage
+          persistentVolumeClaim:
+            claimName: redis-data

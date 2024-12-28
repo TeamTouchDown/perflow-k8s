@@ -10,4 +10,3 @@ spec:
   resources:
     requests:
       storage: 10Gi  # 필요에 따라 크기 조정
-  storageClassName: gp2  # EKS 클러스터의 스토리지 클래스에 따라 변경

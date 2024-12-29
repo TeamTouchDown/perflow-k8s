@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: perflow-ingress
+  namespace: perflow
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:851725312801:certificate/2b7fb314-2b14-4cff-b376-d179ab2d61b5
+    alb.ingress.kubernetes.io/ssl-redirect: '443'
+spec:
+  ingressClassName: alb
+  rules:
+    # 전체 도메인 요청 규칙
+    - host: perflow.site
+      http:
+        paths:
+          # /api/ 경로는 Spring Boot 서비스로 라우팅
+          - path: /api/v1/
+            pathType: Prefix
+            backend:
+              service:
+                name: springboot-service # Spring Boot의 Kubernetes 서비스 이름
+                port:
+                  number: 8080 # Spring Boot 서비스 포트
+  tls:
+    - hosts:
+        - perflow.site
+      secretName: tls-secret

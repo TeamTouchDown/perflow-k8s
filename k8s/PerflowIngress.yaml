@@ -23,8 +23,4 @@ spec:
               service:
                 name: backend-service # Spring Boot의 Kubernetes 서비스 이름
                 port:
-                  number: 8080 # Spring Boot 서비스 포트
-  tls:
-    - hosts:
-        - perflow.site
-      secretName: tls-secret
+                  number: 80 # Spring Boot 서비스 포트

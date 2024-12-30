@@ -17,7 +17,7 @@ spec:
       http:
         paths:
           # /api/ 경로는 Spring Boot 서비스로 라우팅
-          - path: /api/v1/*
+          - path: /api/v1/
             pathType: Prefix
             backend:
               service:

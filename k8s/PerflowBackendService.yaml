@@ -8,6 +8,6 @@ spec:
     app: backend
   ports:
     - protocol: TCP
-      port: 80          # 클러스터 내에서 사용되는 포트
+      port: 8080        # 클러스터 내에서 사용되는 포트
       targetPort: 8080  # 파드 내 컨테이너의 포트
   type: LoadBalancer    # 외부에서 접근할 수 있도록 LoadBalancer 타입 사용

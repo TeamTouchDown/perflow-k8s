@@ -17,8 +17,16 @@ spec:
       http:
         paths:
           # /api/ 경로는 Spring Boot 서비스로 라우팅
-          - path: /
+          - path: /api/v1/*
             pathType: Prefix
+            backend:
+              service:
+                name: backend-service # Spring Boot의 Kubernetes 서비스 이름
+                port:
+                  number: 80 # Spring Boot 서비스 포트
+          # /api/ 경로는 Spring Boot 서비스로 라우팅
+          - path: /actuator/health
+            pathType: Exact
             backend:
               service:
                 name: backend-service # Spring Boot의 Kubernetes 서비스 이름
